@@ -1,4 +1,4 @@
-from lexicon.lexicon_commands import LEXICON_COMMANDS
+from lexicon.lexicon_ru import LEXICON_COMMANDS
 from aiogram import Bot
 from aiogram.types import BotCommand
 
