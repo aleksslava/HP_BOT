@@ -6,6 +6,8 @@ from config_data.config import Config, load_config
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
+from handlers import user_handlers
+from keyboards.main_menu_keyboard import set_main_menu
 
 # Инициализация логгера
 logger = logging.getLogger(__name__)
@@ -30,6 +32,9 @@ async def main(storage: MemoryStorage | None = MemoryStorage()):
     )
     dp = Dispatcher(storage=storage)
 
+    dp.include_router(user_handlers.router)  # Подключение роутера user_handlers
+
+    await set_main_menu(bot)
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
     logger.info('Bot started successful')
