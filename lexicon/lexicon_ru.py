@@ -1,9 +1,15 @@
-LEXICON_RU: dict[str, str] = {
-    'start': 'Запуск бота',
-    'help': 'Помощь',
-    'equip': 'Устройства',
-    'standart': 'Типовой расчёт',
-    'items': 'Устройства Hite-Pro'
+'''Кнопки для inline клавиатуры'''
+LEXICON_INLINE_RU: dict[str, str | dict[str, str]] = {
+    'start': {'descr': 'Запуск бота',
+              'callback': 'start'},
+    'help': {'descr': 'Помощь',
+             'callback': 'help'},
+    'equip': {'descr': 'Устройства',
+              'callback': 'equip'},
+    'standart': {'standart': 'Типовой расчёт',
+                 'callback': 'standart'},
+    'items': {'descr': 'Устройства Hite-Pro',
+              'callback': 'items'}
 }
 
 
@@ -14,4 +20,12 @@ LEXICON_COMMANDS: dict[str, str] = {
     '/standart': 'Типовые проекты умного дома ',
     '/items': 'Оборудование Hite-Pro!',
     '/help': 'Помощь'
+}
+
+LEXICON_RU: dict[str, str] = {
+    'start': 'Выберите необходимый пункт меню',
+    'help': 'Тут будет описание возможностей бота и каждого отдельного пункта меню',
+    'equip': '',
+    'standart': '',
+    'items': ''
 }

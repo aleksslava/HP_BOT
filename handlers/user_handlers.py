@@ -11,4 +11,4 @@ router = Router()
 async def process_start(message: Message):
     '''Отправка приветственного текста и главной клавиатуры'''
 
-    await message.answer(text=LEXICON_RU['/start'],)
+    await message.answer(text=LEXICON_RU['start'], )

@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de5a0dea-728c-4f11-8c27-c140a36681ef" name="Changes" comment="add process_start handler&#10;add LEXICON_RU dict">
+    <list default="true" id="de5a0dea-728c-4f11-8c27-c140a36681ef" name="Changes" comment="Lexicon_commands move to lexicon_ru.py">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handlers/user_handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/user_handlers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/keyboards/main_menu_keyboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/keyboards/main_menu_keyboard.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lexicon/lexicon_commands.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lexicon/lexicon_ru.py" beforeDir="false" afterPath="$PROJECT_DIR$/lexicon/lexicon_ru.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,6 +24,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -176,7 +179,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720786427952</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Lexicon_commands move to lexicon_ru.py">
+      <option name="closed" value="true" />
+      <created>1720793687384</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1720793687384</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -187,6 +198,7 @@
     <MESSAGE value="add set_main_menu def" />
     <MESSAGE value="add user_handlers router&#10;add main_menu" />
     <MESSAGE value="add process_start handler&#10;add LEXICON_RU dict" />
-    <option name="LAST_COMMIT_MESSAGE" value="add process_start handler&#10;add LEXICON_RU dict" />
+    <MESSAGE value="Lexicon_commands move to lexicon_ru.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lexicon_commands move to lexicon_ru.py" />
   </component>
 </project>
