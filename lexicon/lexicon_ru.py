@@ -1,15 +1,9 @@
-'''Кнопки для inline клавиатуры'''
-LEXICON_INLINE_RU: dict[str, str | dict[str, str]] = {
-    'start': {'descr': 'Запуск бота',
-              'callback': 'start'},
-    'help': {'descr': 'Помощь',
-             'callback': 'help'},
-    'equip': {'descr': 'Устройства',
-              'callback': 'equip'},
-    'standart': {'standart': 'Типовой расчёт',
-                 'callback': 'standart'},
-    'items': {'descr': 'Устройства Hite-Pro',
-              'callback': 'items'}
+"""Кнопки для inline клавиатуры"""
+LEXICON_MAIN_INLINE_RU: dict[str, str] = {
+    'Подбор оборудования': 'equip',
+    'Типовые проекты умного дома': 'standart',
+    'Устройства Hite-Pro': 'items',
+    'Помощь': 'help',
 }
 
 
@@ -27,5 +21,6 @@ LEXICON_RU: dict[str, str] = {
     'help': 'Тут будет описание возможностей бота и каждого отдельного пункта меню',
     'equip': '',
     'standart': '',
-    'items': ''
+    'items': '',
+    'repeat': 'Вы уже находитесь в этом пункте меню.'
 }
