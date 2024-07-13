@@ -6,8 +6,9 @@ from config_data.config import Config, load_config
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
-from handlers import user_handlers
+from handlers import user_handlers, equip_question_handler
 from keyboards.main_menu_keyboard import set_main_menu
+
 
 # Инициализация логгера
 logger = logging.getLogger(__name__)
@@ -32,6 +33,7 @@ async def main(storage: MemoryStorage | None = MemoryStorage()):
     )
     dp = Dispatcher(storage=storage)
 
+    dp.include_router(equip_question_handler.form_router)
     dp.include_router(user_handlers.router)  # Подключение роутера user_handlers
 
     await set_main_menu(bot)

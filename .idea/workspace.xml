@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de5a0dea-728c-4f11-8c27-c140a36681ef" name="Changes" comment="format lexicon_ru.py">
+    <list default="true" id="de5a0dea-728c-4f11-8c27-c140a36681ef" name="Changes" comment="add handlers process_start \ &#10;process_help \ process_inline_help">
+      <change afterPath="$PROJECT_DIR$/fsm_forms/fsm_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/handlers/equip_question_handler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handlers/user_handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/user_handlers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboards/main_menu_keyboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/keyboards/main_menu_keyboard.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lexicon/lexicon_ru.py" beforeDir="false" afterPath="$PROJECT_DIR$/lexicon/lexicon_ru.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,7 +196,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720796153305</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="add handlers process_start \ &#10;process_help \ process_inline_help">
+      <option name="closed" value="true" />
+      <created>1720868271980</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1720868271980</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -208,6 +217,7 @@
     <MESSAGE value="add process_start handler&#10;add LEXICON_RU dict" />
     <MESSAGE value="Lexicon_commands move to lexicon_ru.py" />
     <MESSAGE value="format lexicon_ru.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="format lexicon_ru.py" />
+    <MESSAGE value="add handlers process_start \ &#10;process_help \ process_inline_help" />
+    <option name="LAST_COMMIT_MESSAGE" value="add handlers process_start \ &#10;process_help \ process_inline_help" />
   </component>
 </project>

@@ -30,3 +30,5 @@ async def process_inline_help(callback: CallbackQuery):
         await callback.message.edit_text(text=LEXICON_RU['help'], reply_markup=callback.message.reply_markup)
     else:
         await callback.answer(text=LEXICON_RU['repeat'])
+
+
