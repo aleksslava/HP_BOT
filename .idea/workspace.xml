@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de5a0dea-728c-4f11-8c27-c140a36681ef" name="Changes" comment="add fsm_model.py / equip_question_handler.py">
+    <list default="true" id="de5a0dea-728c-4f11-8c27-c140a36681ef" name="Changes" comment="edit fsm_models.py / equip_question_handler.py">
+      <change afterPath="$PROJECT_DIR$/keyboards/other_keyboards.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fsm_forms/fsm_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/fsm_forms/fsm_models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handlers/equip_question_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/equip_question_handler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handlers/user_handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/user_handlers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/keyboards/main_menu_keyboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/keyboards/main_menu_keyboard.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lexicon/lexicon_ru.py" beforeDir="false" afterPath="$PROJECT_DIR$/lexicon/lexicon_ru.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,7 +213,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720893677045</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="edit fsm_models.py / equip_question_handler.py">
+      <option name="closed" value="true" />
+      <created>1721125518938</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1721125518938</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -225,6 +236,7 @@
     <MESSAGE value="format lexicon_ru.py" />
     <MESSAGE value="add handlers process_start \ &#10;process_help \ process_inline_help" />
     <MESSAGE value="add fsm_model.py / equip_question_handler.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="add fsm_model.py / equip_question_handler.py" />
+    <MESSAGE value="edit fsm_models.py / equip_question_handler.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit fsm_models.py / equip_question_handler.py" />
   </component>
 </project>
