@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de5a0dea-728c-4f11-8c27-c140a36681ef" name="Changes" comment="add handlers process_start \ &#10;process_help \ process_inline_help">
-      <change afterPath="$PROJECT_DIR$/fsm_forms/fsm_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/handlers/equip_question_handler.py" afterDir="false" />
+    <list default="true" id="de5a0dea-728c-4f11-8c27-c140a36681ef" name="Changes" comment="add fsm_model.py / equip_question_handler.py">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/user_handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/user_handlers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fsm_forms/fsm_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/fsm_forms/fsm_models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handlers/equip_question_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/equip_question_handler.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -204,7 +202,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720868271980</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="add fsm_model.py / equip_question_handler.py">
+      <option name="closed" value="true" />
+      <created>1720893677045</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1720893677045</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -218,6 +224,7 @@
     <MESSAGE value="Lexicon_commands move to lexicon_ru.py" />
     <MESSAGE value="format lexicon_ru.py" />
     <MESSAGE value="add handlers process_start \ &#10;process_help \ process_inline_help" />
-    <option name="LAST_COMMIT_MESSAGE" value="add handlers process_start \ &#10;process_help \ process_inline_help" />
+    <MESSAGE value="add fsm_model.py / equip_question_handler.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="add fsm_model.py / equip_question_handler.py" />
   </component>
 </project>
