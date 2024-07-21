@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de5a0dea-728c-4f11-8c27-c140a36681ef" name="Changes" comment="edit equip_question_handler.py">
+    <list default="true" id="de5a0dea-728c-4f11-8c27-c140a36681ef" name="Changes" comment="add def cross_switch_one_count">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fsm_forms/fsm_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/fsm_forms/fsm_models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handlers/equip_question_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/equip_question_handler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lexicon/lexicon_ru.py" beforeDir="false" afterPath="$PROJECT_DIR$/lexicon/lexicon_ru.py" afterDir="false" />
     </list>
@@ -227,7 +226,23 @@
       <option name="project" value="LOCAL" />
       <updated>1721147597507</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="add def cross_button_two_count">
+      <option name="closed" value="true" />
+      <created>1721579363980</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1721579363980</updated>
+    </task>
+    <task id="LOCAL-00016" summary="add def cross_switch_one_count">
+      <option name="closed" value="true" />
+      <created>1721583112408</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1721583112408</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -244,6 +259,8 @@
     <MESSAGE value="add fsm_model.py / equip_question_handler.py" />
     <MESSAGE value="edit fsm_models.py / equip_question_handler.py" />
     <MESSAGE value="edit equip_question_handler.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="edit equip_question_handler.py" />
+    <MESSAGE value="add def cross_button_two_count" />
+    <MESSAGE value="add def cross_switch_one_count" />
+    <option name="LAST_COMMIT_MESSAGE" value="add def cross_switch_one_count" />
   </component>
 </project>
