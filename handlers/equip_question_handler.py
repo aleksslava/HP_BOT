@@ -47,7 +47,7 @@ async def set_name(message: Message, state: FSMContext):
 
 # Хэндлер для обработки типа строения
 @form_router.callback_query(FSMEquipForm.type_home)
-async def set_type_home(callback:CallbackQuery, state: FSMContext):
+async def set_type_home(callback: CallbackQuery, state: FSMContext):
     await state.update_data(home_type=callback.data)
     await state.set_state(FSMEquipForm.stage)
     await callback.message.edit_text(text=LEXICON_RU['stage'], reply_markup=get_other_keyboard(REPAIR_STAGE,
@@ -121,6 +121,7 @@ async def cross_button_existence(callback: CallbackQuery, state: FSMContext):
         await state.set_state(FSMEquipForm.smart_socket)
         await callback.message.edit_text(text=LEXICON_RU['smart_socket_existence'],
                                          reply_markup=get_other_keyboard(yes_no_keyboard, cancel_keyboard))
+    logger.info(f'Update handled by {start_form_equip.__name__}')
 
 
 # Хэндлер обрабатывающий ответ на кол-во одноклавишных проходных выключателей
@@ -137,6 +138,7 @@ async def cross_button_one_count(message: Message, state: FSMContext):
     else:
         await message.answer(text=LEXICON_RU['button_count_false'],
                              reply_markup=get_other_keyboard(cancel_keyboard))
+    logger.info(f'Update handled by {start_form_equip.__name__}')
 
 
 # Хэндлер обрабатывающий ответ на кол-во двухклавишных проходных выключателей
@@ -153,6 +155,19 @@ async def cross_button_two_count(message: Message, state: FSMContext):
     else:
         await message.answer(text=LEXICON_RU['button_count_false'],
                              reply_markup=get_other_keyboard(cancel_keyboard))
+    logger.info(f'Update handled by {start_form_equip.__name__}')
+
+
+# Хэндлер обрабатывающий ответ на количество одноклавишных перекрёстных выключателей
+@form_router.message(FSMEquipForm.cross_switch_one)
+async def cross_switch_one_count(message: Message, state: FSMContext):
+    if message.text.isdigit():
+        await state.update_data(cross_switch_one_count=int(message.text))
+        await state.set_state(FSMEquipForm.cross_switch_two)
+        await message.answer(text=LEXICON_RU['cross_switch_two'], reply_markup=get_other_keyboard(cancel_keyboard))
+    else:
+        await message.answer(text=LEXICON_RU['button_count_false'], reply_markup=get_other_keyboard(cancel_keyboard))
+    logger.info(f'Update handled by {start_form_equip.__name__}')
 
 
 # Хэндлер обрабатывающий отмену прохождения анкеты
