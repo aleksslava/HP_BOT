@@ -1,6 +1,8 @@
 from aiogram.fsm.state import State, StatesGroup
 
 '''Анкета для опроса клиента и подбора оборудования'''
+
+
 class FSMEquipForm(StatesGroup):
     name = State()  # Имя клиента
     type_home = State()  # Тип строения
@@ -8,7 +10,11 @@ class FSMEquipForm(StatesGroup):
     wiring = State()  # Проведена ли проводка?
     one_button_switch = State()  # Кол-во одноклавишных выключателей
     two_button_switch = State()  # Кол-во двухклавишных выключателей
-    cross_button = State()  # Кол-во проходных выключателей
+    cross_button_existence = State()  # Наличие проходных и перекрёстных выключателей
+    cross_button_one = State()  # Кол-во проходных одноклавишных выключателей
+    cross_button_two = State()  # Кол-во проходных двухклавишных выключателей
+    cross_switch_one = State()  # Кол-во перекрёстных одноклавишных выключателей
+    cross_switch_two = State()  # Кол-во перекрёстных двухклавишных выключателей
     group_lights = State()  # Кол-во групп света
     led_strips = State()  # Будут ли лед ленты?
     led_strips_count = State()  # Кол-во лед лент одноцветных
@@ -31,6 +37,8 @@ class FSMEquipForm(StatesGroup):
 
 
 '''Анкета для опроса клиента перед отправкой типового предложения'''
-class FSM_standart_Form(StatesGroup):
+
+
+class FSMStandartForm(StatesGroup):
     name = State()  # Имя клиента
     stage = State()  # Стадия стоительства
