@@ -27,11 +27,12 @@ class FSMEquipForm(StatesGroup):
     water_protect = State()  # Нужна защита от протечек?
     wet_zone_count = State()  # Кол-во мокрых зон
     water_rizer_count = State()  # Количество стояков системы водоснабжения
-    smart_cornice = State()  # Будут электрокарнизы?
+    smart_cornice_existence = State()  # Будут электрокарнизы?
     smart_cornice_count = State()  # Количество карнизов
-    warm_floor = State()  # Будет тёплый пол?
-    warm_floor_type = State()  # Тип тёплого пола
-    warm_floor_count = State()  # Количество зон тёплого пола
+    warm_floor_electric = State()  # Наличие электрического тёплого пола
+    warm_floor_electric_count = State()  # Количество зон электрического тйплого пола
+    warm_floor_water = State()  # Наличие водяного тёплого пола
+    warm_floor_water_count = State() # Количество зон водяного тёплого пола
     smart_gates = State()  # Будут откатные ворота?
     smart_gates_count = State()  # Кол-во ворот откатных.
 

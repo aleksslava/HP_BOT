@@ -320,13 +320,82 @@ async def water_protect_existence(callback: CallbackQuery, state: FSMContext):
     if callback.data == 'yes':
         await state.update_data(water_protect_existence=True)
         await state.set_state(FSMEquipForm.wet_zone_count)
-        await callback.message.edit_text(text=LEXICON_RU['wet_zone_count'], # ХЭНДЛЕР НЕ ДОПИСАН
+        await callback.message.edit_text(text=LEXICON_RU['wet_zone_count'],
                                          reply_markup=get_other_keyboard(cancel_keyboard))
     else:
-        await state.update_data(smart_socket_existence=False)
-        await state.set_state(FSMEquipForm.)
-        await callback.message.edit_text(text=LEXICON_RU['water_protect'],
+        await state.update_data(water_protect_existence=False)
+        await state.set_state(FSMEquipForm.smart_cornice_existence)
+        await callback.message.edit_text(text=LEXICON_RU['smart_cornice_existence'],
                                          reply_markup=get_other_keyboard(yes_no_keyboard, cancel_keyboard))
     logger.info(f'Update handled by {start_form_equip.__name__}')
 
-"""Если ответ да, то перехоим на вопрос про количество мокрых зон, если нет то к наличию карнизов"""
+
+# Хэндлер обрабатывающий ответ на количество мокрых зон
+@form_router.message(FSMEquipForm.wet_zone_count)
+async def wet_zone_count(message: Message, state: FSMContext):
+    if message.text.isdigit():
+        await state.update_data(wet_zone_count=int(message.text))
+        await state.set_state(FSMEquipForm.water_rizer_count)
+        await message.answer(text=LEXICON_RU['water_rizer_count'],
+                             reply_markup=get_other_keyboard(cancel_keyboard))
+    else:
+        await message.answer(text=LEXICON_RU['button_count_false'], reply_markup=get_other_keyboard(cancel_keyboard))
+    logger.info(f'Update handled by {start_form_equip.__name__}')
+
+
+# Хэндлер обрабатывающий ответ на количество стояков системы водоснабжения
+@form_router.message(FSMEquipForm.water_rizer_count)
+async def water_rizer_count(message: Message, state: FSMContext):
+    if message.text.isdigit():
+        await state.update_data(water_rizer_count=int(message.text))
+        await state.set_state(FSMEquipForm.smart_cornice_existence)
+        await message.answer(text=LEXICON_RU['smart_cornice_existence'],
+                             reply_markup=get_other_keyboard(yes_no_keyboard, cancel_keyboard))
+    else:
+        await message.answer(text=LEXICON_RU['button_count_false'], reply_markup=get_other_keyboard(cancel_keyboard))
+    logger.info(f'Update handled by {start_form_equip.__name__}')
+
+
+# Хэндлер обрабатывающий ответ на необходимость электрокарнизов
+@form_router.callback_query(FSMEquipForm.smart_cornice_existence)
+async def smart_cornice_existence(callback: CallbackQuery, state: FSMContext):
+    if callback.data == 'yes':
+        await state.update_data(smart_cornice_existence=True)
+        await state.set_state(FSMEquipForm.smart_cornice_count)
+        await callback.message.edit_text(text=LEXICON_RU['smart_cornice_count'],
+                                         reply_markup=get_other_keyboard(cancel_keyboard))
+    else:
+        await state.update_data(smart_cornice_existence=False)
+        await state.set_state(FSMEquipForm.warm_floor_electric)
+        await callback.message.edit_text(text=LEXICON_RU['warm_floor_electric'],
+                                         reply_markup=get_other_keyboard(yes_no_keyboard, cancel_keyboard))
+    logger.info(f'Update handled by {start_form_equip.__name__}')
+
+
+# Хэндлер обрабатывающий ответ на количество электрокарнизов
+@form_router.message(FSMEquipForm.smart_cornice_count)
+async def smart_cornice_count(message: Message, state: FSMContext):
+    if message.text.isdigit():
+        await state.update_data(smart_cornice_count=int(message.text))
+        await state.set_state(FSMEquipForm.warm_floor_electric)
+        await message.answer(text=LEXICON_RU['warm_floor_electric'],
+                             reply_markup=get_other_keyboard(yes_no_keyboard, cancel_keyboard))
+    else:
+        await message.answer(text=LEXICON_RU['button_count_false'], reply_markup=get_other_keyboard(cancel_keyboard))
+    logger.info(f'Update handled by {start_form_equip.__name__}')
+
+
+# Хэндлер обрабатывающий ответ на необходимость электического тёплого пола
+@form_router.callback_query(FSMEquipForm.warm_floor_electric)
+async def warm_floor_electric(callback: CallbackQuery, state: FSMContext):
+    if callback.data == 'yes':
+        await state.update_data(warm_floor_electric=True)
+        await state.set_state(FSMEquipForm.warm_floor_electric_count)
+        await callback.message.edit_text(text=LEXICON_RU['warm_floor_electric_count'],
+                                         reply_markup=get_other_keyboard(cancel_keyboard))
+    else:
+        await state.update_data(smart_cornice_existence=False)
+        await state.set_state(FSMEquipForm.warm_floor_water)
+        await callback.message.edit_text(text=LEXICON_RU['warm_floor_water'],
+                                         reply_markup=get_other_keyboard(yes_no_keyboard, cancel_keyboard))
+    logger.info(f'Update handled by {start_form_equip.__name__}')
