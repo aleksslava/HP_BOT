@@ -206,10 +206,12 @@ async def group_lights_count(message: Message, state: FSMContext):
 @form_router.callback_query(FSMEquipForm.led_strips)
 async def led_strips_existence(callback: CallbackQuery, state: FSMContext):
     if callback.data == 'yes':
+        await state.update_data(led_existence=True)
         await state.set_state(FSMEquipForm.led_strips_count)
         await callback.message.edit_text(text=LEXICON_RU['led_strips_count'],
                                          reply_markup=get_other_keyboard(cancel_keyboard))
     else:
+        await state.update_data(led_existence=False)
         await state.set_state(FSMEquipForm.smart_socket)
         await callback.message.edit_text(text=LEXICON_RU['smart_socket_existence'],
                                          reply_markup=get_other_keyboard(yes_no_keyboard, cancel_keyboard))
@@ -217,3 +219,114 @@ async def led_strips_existence(callback: CallbackQuery, state: FSMContext):
 
 
 
+# Хэндлер обрабатывающий ответ на количество одноцветных led лент
+@form_router.message(FSMEquipForm.led_strips_count)
+async def led_strips_count(message: Message, state: FSMContext):
+    if message.text.isdigit():
+        await state.update_data(led_strips_count=int(message.text))
+        await state.set_state(FSMEquipForm.rgb_strips_count)
+        await message.answer(text=LEXICON_RU['rgb_strips_count'], reply_markup=get_other_keyboard(cancel_keyboard))
+    else:
+        await message.answer(text=LEXICON_RU['button_count_false'], reply_markup=get_other_keyboard(cancel_keyboard))
+    logger.info(f'Update handled by {start_form_equip.__name__}')
+
+
+# Хэндлер обрабатывающий ответ на количество rgb лент
+@form_router.message(FSMEquipForm.rgb_strips_count)
+async def rgb_strips_count(message: Message, state: FSMContext):
+    if message.text.isdigit():
+        await state.update_data(rgb_strips_count=int(message.text))
+        await state.set_state(FSMEquipForm.rgbw_strips_count)
+        await message.answer(text=LEXICON_RU['rgbw_strips_count'], reply_markup=get_other_keyboard(cancel_keyboard))
+    else:
+        await message.answer(text=LEXICON_RU['button_count_false'], reply_markup=get_other_keyboard(cancel_keyboard))
+    logger.info(f'Update handled by {start_form_equip.__name__}')
+
+
+# Хэндлер обрабатывающий ответ на количество rgbw лент
+@form_router.message(FSMEquipForm.rgbw_strips_count)
+async def rgbw_strips_count(message: Message, state: FSMContext):
+    if message.text.isdigit():
+        await state.update_data(rgbw_strips_count=int(message.text))
+        await state.set_state(FSMEquipForm.dim_lights)
+        await message.answer(text=LEXICON_RU['dim_lights_existence'],
+                             reply_markup=get_other_keyboard(yes_no_keyboard, cancel_keyboard))
+    else:
+        await message.answer(text=LEXICON_RU['button_count_false'], reply_markup=get_other_keyboard(cancel_keyboard))
+    logger.info(f'Update handled by {start_form_equip.__name__}')
+
+
+# Хэндлер обрабатывающий ответ на наличие диммируемых групп освещения
+@form_router.callback_query(FSMEquipForm.dim_lights)
+async def dim_lights_existence(callback: CallbackQuery, state: FSMContext):
+    if callback.data == 'yes':
+        await state.update_data(dim_lights_existence=True)
+        await state.set_state(FSMEquipForm.dim_lights_count)
+        await callback.message.edit_text(text=LEXICON_RU['dim_lights_count'],
+                                         reply_markup=get_other_keyboard(cancel_keyboard))
+    else:
+        await state.update_data(dim_lights_existence=False)
+        await state.set_state(FSMEquipForm.smart_socket)
+        await callback.message.edit_text(text=LEXICON_RU['smart_socket_existence'],
+                                         reply_markup=get_other_keyboard(yes_no_keyboard, cancel_keyboard))
+    logger.info(f'Update handled by {start_form_equip.__name__}')
+
+
+# Хэндлер обрабатывающий ответ на количество диммируемых групп освещения
+@form_router.message(FSMEquipForm.dim_lights_count)
+async def dim_lights_count(message: Message, state: FSMContext):
+    if message.text.isdigit():
+        await state.update_data(dim_lights_count=int(message.text))
+        await state.set_state(FSMEquipForm.smart_socket)
+        await message.answer(text=LEXICON_RU['smart_socket_existence'],
+                             reply_markup=get_other_keyboard(yes_no_keyboard, cancel_keyboard))
+    else:
+        await message.answer(text=LEXICON_RU['button_count_false'], reply_markup=get_other_keyboard(cancel_keyboard))
+    logger.info(f'Update handled by {start_form_equip.__name__}')
+
+
+# Хэндлер обрабатывающий ответ на наличие умных розеток
+@form_router.callback_query(FSMEquipForm.smart_socket)
+async def smart_socket_existence(callback: CallbackQuery, state: FSMContext):
+    if callback.data == 'yes':
+        await state.update_data(smart_socket_existence=True)
+        await state.set_state(FSMEquipForm.smart_socket_count)
+        await callback.message.edit_text(text=LEXICON_RU['smart_socket_count'],
+                                         reply_markup=get_other_keyboard(cancel_keyboard))
+    else:
+        await state.update_data(smart_socket_existence=False)
+        await state.set_state(FSMEquipForm.water_protect)
+        await callback.message.edit_text(text=LEXICON_RU['water_protect'],
+                                         reply_markup=get_other_keyboard(yes_no_keyboard, cancel_keyboard))
+    logger.info(f'Update handled by {start_form_equip.__name__}')
+
+
+# Хэндел обрабатывающий ответ на количество умных розеток
+@form_router.message(FSMEquipForm.smart_socket_count)
+async def smart_socket_count(message: Message, state: FSMContext):
+    if message.text.isdigit():
+        await state.update_data(smart_socket_count=int(message.text))
+        await state.set_state(FSMEquipForm.water_protect)
+        await message.answer(text=LEXICON_RU['water_protect'],
+                             reply_markup=get_other_keyboard(yes_no_keyboard, cancel_keyboard))
+    else:
+        await message.answer(text=LEXICON_RU['button_count_false'], reply_markup=get_other_keyboard(cancel_keyboard))
+    logger.info(f'Update handled by {start_form_equip.__name__}')
+
+
+# Хэндлер обрабатывающий ответ на необходимость защиты от протечек
+@form_router.callback_query(FSMEquipForm.water_protect)
+async def water_protect_existence(callback: CallbackQuery, state: FSMContext):
+    if callback.data == 'yes':
+        await state.update_data(water_protect_existence=True)
+        await state.set_state(FSMEquipForm.wet_zone_count)
+        await callback.message.edit_text(text=LEXICON_RU['wet_zone_count'], # ХЭНДЛЕР НЕ ДОПИСАН
+                                         reply_markup=get_other_keyboard(cancel_keyboard))
+    else:
+        await state.update_data(smart_socket_existence=False)
+        await state.set_state(FSMEquipForm.)
+        await callback.message.edit_text(text=LEXICON_RU['water_protect'],
+                                         reply_markup=get_other_keyboard(yes_no_keyboard, cancel_keyboard))
+    logger.info(f'Update handled by {start_form_equip.__name__}')
+
+"""Если ответ да, то перехоим на вопрос про количество мокрых зон, если нет то к наличию карнизов"""
