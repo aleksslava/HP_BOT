@@ -45,7 +45,7 @@ async def set_name(message: Message, state: FSMContext):
         await state.update_data(name=message.text)
         await state.set_state(FSMEquipForm.type_home)
         await message.answer(text=LEXICON_RU['type_home'], reply_markup=get_other_keyboard(HOME_TYPES,
-                                                                                           cancel_keyboard, width=4))
+                                                                                           cancel_keyboard, width=1))
     else:
         await message.answer(text=LEXICON_RU['name_false'], reply_markup=get_other_keyboard(cancel_keyboard))
     logger.info(f'Update handled by {start_form_equip.__name__}')
@@ -66,7 +66,7 @@ async def set_type_home(callback: CallbackQuery, state: FSMContext):
 async def repair_stage(callback: CallbackQuery, state: FSMContext):
     await state.update_data(stage=callback.data)
     if callback.data == 'repair_complete':
-        await state.update_data(wiring=None)
+        await state.update_data(wiring=False)
         await state.set_state(FSMEquipForm.one_button_switch)
         await callback.message.edit_text(text=LEXICON_RU['one_button_count'],
                                          reply_markup=get_other_keyboard(cancel_keyboard))
@@ -398,4 +398,83 @@ async def warm_floor_electric(callback: CallbackQuery, state: FSMContext):
         await state.set_state(FSMEquipForm.warm_floor_water)
         await callback.message.edit_text(text=LEXICON_RU['warm_floor_water'],
                                          reply_markup=get_other_keyboard(yes_no_keyboard, cancel_keyboard))
+    logger.info(f'Update handled by {start_form_equip.__name__}')
+
+
+# Хэндлер обрабатывающий ответ на количество зон электрического тёплого пола
+@form_router.message(FSMEquipForm.warm_floor_electric_count)
+async def warm_floor_electric_count(message: Message, state: FSMContext):
+    if message.text.isdigit():
+        await state.update_data(warm_floor_electric_count=int(message.text))
+        await state.set_state(FSMEquipForm.warm_floor_water)
+        await message.answer(text=LEXICON_RU['warm_floor_water'],
+                             reply_markup=get_other_keyboard(yes_no_keyboard, cancel_keyboard))
+    else:
+        await message.answer(text=LEXICON_RU['button_count_false'], reply_markup=get_other_keyboard(cancel_keyboard))
+    logger.info(f'Update handled by {start_form_equip.__name__}')
+
+
+# Хэндлер обрабатывающий ответ на необходимость водяного тёплого пола
+@form_router.callback_query(FSMEquipForm.warm_floor_water)
+async def warm_floor_water(callback: CallbackQuery, state: FSMContext):
+    if callback.data == 'yes':
+        await state.update_data(warm_floor_water=True)
+        await state.set_state(FSMEquipForm.warm_floor_water_count)
+        await callback.message.edit_text(text=LEXICON_RU['warm_floor_water_count'],
+                                         reply_markup=get_other_keyboard(cancel_keyboard))
+    else:
+        await state.update_data(warm_floor_water=False)
+        data = await state.get_data()
+        if data['home_type'] == 'cottage':
+            await state.set_state(FSMEquipForm.smart_gates)
+            await callback.message.edit_text(text=LEXICON_RU['smart_gates'],
+                                             reply_markup=get_other_keyboard(yes_no_keyboard, cancel_keyboard))
+        else:
+            await state.clear()
+            await callback.message.edit_text(text='Тут будет отправляться список оборудования',
+                                             reply_markup=get_other_keyboard(cancel_keyboard))
+    logger.info(f'Update handled by {start_form_equip.__name__}')
+
+
+# Хэндлер обрабатывающий ответ на количество зон водяного теплого пола
+@form_router.message(FSMEquipForm.warm_floor_water_count)
+async def warm_floor_water_count(message: Message, state: FSMContext):
+    if message.text.isdigit():
+        await state.update_data(warm_floor_water_count=int(message.text))
+        data = await state.get_data()
+        if data['home_type'] == 'cottage':
+            await state.set_state(FSMEquipForm.smart_gates)
+            await message.edit_text(text=LEXICON_RU['smart_gates'],
+                                    reply_markup=get_other_keyboard(yes_no_keyboard, cancel_keyboard))
+        else:
+            await state.clear()
+            await message.edit_text(text='Тут будет отправляться список оборудования',
+                                    reply_markup=get_other_keyboard(cancel_keyboard))
+    logger.info(f'Update handled by {start_form_equip.__name__}')
+
+
+# Хэндлер обрабатывающий ответ на необходимость подключения ворот
+@form_router.callback_query(FSMEquipForm.smart_gates)
+async def smart_gates(callback: CallbackQuery, state: FSMContext):
+    if callback.data == 'yes':
+        await state.update_data(smart_gates=True)
+        await state.set_state(FSMEquipForm.smart_gates_count)
+        await callback.message.edit_text(text=LEXICON_RU['smart_gates_count'],
+                                         reply_markup=get_other_keyboard(cancel_keyboard))
+    else:
+        await state.update_data(smart_gates=False)
+        await state.clear()
+        await callback.message.edit_text(text='Тут будет список подобранного оборудования.',
+                                         reply_markup=get_other_keyboard(cancel_keyboard))
+    logger.info(f'Update handled by {start_form_equip.__name__}')
+
+
+# Хэндлер обрабатывающий ответ на количество ворот
+@form_router.message(FSMEquipForm.smart_gates_count)
+async def smart_gates_count(message: Message, state: FSMContext):
+    if message.text.isdigit():
+        await state.update_data(smart_gates_count=int(message.text))
+        await state.clear()
+        await message.answer(text='Тут будет список оборудования',
+                             reply_markup=get_other_keyboard(cancel_keyboard))
     logger.info(f'Update handled by {start_form_equip.__name__}')

@@ -14,7 +14,8 @@ router = Router()
 async def process_start(message: Message):
     """Отправка приветственного текста и главной инлайн клавиатуры"""
 
-    await message.answer(text=LEXICON_RU['start'], reply_markup=get_other_keyboard(LEXICON_MAIN_INLINE_RU))
+    await message.answer(text=LEXICON_RU['start'],
+                         reply_markup=get_other_keyboard(LEXICON_MAIN_INLINE_RU, width=1))
 
 
 # Хэндлер срабатывающий на команду /help
