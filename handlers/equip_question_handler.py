@@ -1,4 +1,6 @@
 import logging
+from pprint import pprint
+
 from aiogram import Router, F
 from fsm_forms.fsm_models import FSMEquipForm
 from aiogram.types import Message, CallbackQuery
@@ -66,7 +68,7 @@ async def set_type_home(callback: CallbackQuery, state: FSMContext):
 async def repair_stage(callback: CallbackQuery, state: FSMContext):
     await state.update_data(stage=callback.data)
     if callback.data == 'repair_complete':
-        await state.update_data(wiring=False)
+        await state.update_data(wiring=True)
         await state.set_state(FSMEquipForm.one_button_switch)
         await callback.message.edit_text(text=LEXICON_RU['one_button_count'],
                                          reply_markup=get_other_keyboard(cancel_keyboard))
@@ -120,10 +122,12 @@ async def two_button_count(message: Message, state: FSMContext):
 @form_router.callback_query(FSMEquipForm.cross_button_existence)
 async def cross_button_existence(callback: CallbackQuery, state: FSMContext):
     if callback.data == 'yes':
+        await state.update_data(cross_button_existence=True)
         await state.set_state(FSMEquipForm.cross_button_one)
-        await callback.message.answer(text=LEXICON_RU['cross_button_one'],
-                                      reply_markup=get_other_keyboard(cancel_keyboard))
+        await callback.message.edit_text(text=LEXICON_RU['cross_button_one'],
+                                         reply_markup=get_other_keyboard(cancel_keyboard))
     else:
+        await state.update_data(cross_button_existence=False)
         await state.set_state(FSMEquipForm.smart_socket)
         await callback.message.edit_text(text=LEXICON_RU['smart_socket_existence'],
                                          reply_markup=get_other_keyboard(yes_no_keyboard, cancel_keyboard))
@@ -177,7 +181,7 @@ async def cross_switch_one_count(message: Message, state: FSMContext):
 
 
 # Хэндлер обрабатывающий ответ на кол-во двухклавишных перекрестных выключателей
-@form_router.message(FSMEquipForm.cross_button_two)
+@form_router.message(FSMEquipForm.cross_switch_two)
 async def cross_switch_two_count(message: Message, state: FSMContext):
     if message.text.isdigit():
         await state.update_data(cross_switch_two_count=int(message.text))
@@ -444,11 +448,11 @@ async def warm_floor_water_count(message: Message, state: FSMContext):
         data = await state.get_data()
         if data['home_type'] == 'cottage':
             await state.set_state(FSMEquipForm.smart_gates)
-            await message.edit_text(text=LEXICON_RU['smart_gates'],
+            await message.answer(text=LEXICON_RU['smart_gates'],
                                     reply_markup=get_other_keyboard(yes_no_keyboard, cancel_keyboard))
         else:
             await state.clear()
-            await message.edit_text(text='Тут будет отправляться список оборудования',
+            await message.answer(text='Тут будет отправляться список оборудования',
                                     reply_markup=get_other_keyboard(cancel_keyboard))
     logger.info(f'Update handled by {start_form_equip.__name__}')
 
@@ -473,6 +477,8 @@ async def smart_gates(callback: CallbackQuery, state: FSMContext):
 @form_router.message(FSMEquipForm.smart_gates_count)
 async def smart_gates_count(message: Message, state: FSMContext):
     if message.text.isdigit():
+        data = await state.get_data()
+        pprint(data)
         await state.update_data(smart_gates_count=int(message.text))
         await state.clear()
         await message.answer(text='Тут будет список оборудования',
