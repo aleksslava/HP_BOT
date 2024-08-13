@@ -1,6 +1,6 @@
 from aiogram.fsm.state import State, StatesGroup
 
-'''Анкета для опроса клиента и подбора оборудования'''
+'''Анкеты для опроса клиента и подбора оборудования'''
 
 
 class FSMEquipForm(StatesGroup):

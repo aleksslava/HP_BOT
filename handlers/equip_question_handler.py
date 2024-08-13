@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 
 form_router = Router()
 
+
 # Хэндлер обрабатывающий отмену прохождения анкеты
 @form_router.callback_query(F.data == 'cancel')
 async def cancel(callback: CallbackQuery, state=FSMContext) -> None:
