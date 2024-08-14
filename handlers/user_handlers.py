@@ -3,7 +3,7 @@ import logging
 from aiogram import F, Router
 from aiogram.filters import Command, StateFilter
 from aiogram.types import Message, CallbackQuery
-from lexicon.lexicon_ru import LEXICON_RU, LEXICON_MAIN_INLINE_RU, admin_keyboard
+from lexicon.lexicon_ru import LEXICON_RU, LEXICON_MAIN_INLINE_RU, admin_button
 from keyboards.other_keyboards import get_other_keyboard
 from sqlalchemy.ext.asyncio import AsyncSession
 from database.models import User
@@ -21,6 +21,7 @@ async def process_start(message: Message, db: AsyncSession, admin_list: list):
     """Отправка приветственного текста и главной инлайн клавиатуры"""
 
     # Запрашиваем пользователя в бд
+    print(message.from_user.id)
     db_response = await db.execute(select(User).where(User.tg_id == message.from_user.id))
     try:
         db_response = db_response.one_or_none()
@@ -39,7 +40,7 @@ async def process_start(message: Message, db: AsyncSession, admin_list: list):
         if user.is_admin:
             await message.answer(text='Администратор ' + user.name + LEXICON_RU['start'],
                                  reply_markup=get_other_keyboard(LEXICON_MAIN_INLINE_RU,
-                                                                 admin_keyboard, width=1))
+                                                                 admin_button, width=1))
         else:
             await message.answer(text=user.name + LEXICON_RU['start'],
                                  reply_markup=get_other_keyboard(LEXICON_MAIN_INLINE_RU, width=1))

@@ -6,7 +6,7 @@ from config_data.config import Config, load_config, load_db_settings
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
-from handlers import user_handlers, equip_question_handler
+from handlers import user_handlers, equip_question_handler, admin_handlers
 from keyboards.main_menu_keyboard import set_main_menu
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 from middleware.outer_middleware import DBMiddleware
@@ -43,12 +43,14 @@ async def main(storage: MemoryStorage | None = MemoryStorage()):
 
     # Добавление в workflow_data списка id администраторов
     dp.workflow_data['admin_list'] = config.admin_list
+    dp.workflow_data['bot'] = bot
 
-    # Подключение хэндлеров с анкетой на подбор оборудования
-    dp.include_router(equip_question_handler.form_router)
-
-    # Подключение хэндлеров на главное меню
-    dp.include_router(user_handlers.router)  # Подключение роутера user_handlers
+    # Подключение хэндлеров
+    dp.include_routers(
+        equip_question_handler.form_router,
+        user_handlers.router,
+        admin_handlers.admin_router
+    )
 
     await set_main_menu(bot)
     await bot.delete_webhook(drop_pending_updates=True)

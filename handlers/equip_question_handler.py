@@ -10,17 +10,15 @@ from lexicon.lexicon_ru import (LEXICON_RU, HOME_TYPES, cancel_keyboard,
                                 REPAIR_STAGE, yes_no_keyboard, LEXICON_MAIN_INLINE_RU)
 from keyboards.other_keyboards import get_other_keyboard
 
-
 '''В данном модуле расположены хэндлеры на прохождение анкеты для подбора комплекта'''
 logger = logging.getLogger(__name__)
-
 
 form_router = Router()
 
 
 # Хэндлер обрабатывающий отмену прохождения анкеты
 @form_router.callback_query(F.data == 'cancel')
-async def cancel(callback: CallbackQuery, state=FSMContext) -> None:
+async def cancel(callback: CallbackQuery, state: FSMContext) -> None:
     await state.clear()
     await callback.message.edit_text(text=LEXICON_RU['cancel'], reply_markup=get_other_keyboard(LEXICON_MAIN_INLINE_RU))
 
@@ -112,8 +110,8 @@ async def two_button_count(message: Message, state: FSMContext):
     if message.text.isdigit():
         await state.update_data(two_button_count=int(message.text))
         await state.set_state(FSMEquipForm.cross_button_existence)
-        await message.answer(text=LEXICON_RU['cross_button_existence'], reply_markup=get_other_keyboard(yes_no_keyboard,
-                                                                                                        cancel_keyboard))
+        await message.answer(text=LEXICON_RU['cross_button_existence'],
+                             reply_markup=get_other_keyboard(yes_no_keyboard, cancel_keyboard))
     else:
         await message.answer(text=LEXICON_RU['button_count_false'], reply_markup=get_other_keyboard(cancel_keyboard))
     logger.info(f'Update handled by {start_form_equip.__name__}')
@@ -221,7 +219,6 @@ async def led_strips_existence(callback: CallbackQuery, state: FSMContext):
         await callback.message.edit_text(text=LEXICON_RU['smart_socket_existence'],
                                          reply_markup=get_other_keyboard(yes_no_keyboard, cancel_keyboard))
     logger.info(f'Update handled by {start_form_equip.__name__}')
-
 
 
 # Хэндлер обрабатывающий ответ на количество одноцветных led лент
@@ -450,11 +447,11 @@ async def warm_floor_water_count(message: Message, state: FSMContext):
         if data['home_type'] == 'cottage':
             await state.set_state(FSMEquipForm.smart_gates)
             await message.answer(text=LEXICON_RU['smart_gates'],
-                                    reply_markup=get_other_keyboard(yes_no_keyboard, cancel_keyboard))
+                                 reply_markup=get_other_keyboard(yes_no_keyboard, cancel_keyboard))
         else:
             await state.clear()
             await message.answer(text='Тут будет отправляться список оборудования',
-                                    reply_markup=get_other_keyboard(cancel_keyboard))
+                                 reply_markup=get_other_keyboard(cancel_keyboard))
     logger.info(f'Update handled by {start_form_equip.__name__}')
 
 
